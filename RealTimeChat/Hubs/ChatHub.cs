@@ -16,7 +16,7 @@ namespace RealTimeChat.Hubs
         }
         public async Task SendMessage(string username, string message)
         {
-            var callerUserName = Context.GetHttpContext().Request.Cookies["userName"];
+            var callerUserName = Context.GetHttpContext().Request.Cookies["username"];
 
             var userConnectionId = _connectionManager.GetUserConnection(username);
             if (userConnectionId == null)
@@ -30,12 +30,11 @@ namespace RealTimeChat.Hubs
         public override async Task OnConnectedAsync()
         {
 
-            var userName = Context.GetHttpContext().Request.Cookies["userName"];
+            var username = Context.GetHttpContext().Request.Cookies["username"];
 
-            _connectionManager.AddUser(Context.ConnectionId, userName);
-            var t= await _userManagementService.GetUnRecievedMessages(userName);
-            await Clients.Others.SendAsync("UserConnected", userName);
+            _connectionManager.AddUser(Context.ConnectionId, username);
 
+            await Clients.Others.SendAsync("UserConnected", username);
 
             await base.OnConnectedAsync();
         }
@@ -43,10 +42,10 @@ namespace RealTimeChat.Hubs
         public override async Task OnDisconnectedAsync(Exception exception)
         {
 
-            var userName = Context.GetHttpContext().Request.Cookies["userName"];
-            _connectionManager.RemoveUser(userName);
+            var username = Context.GetHttpContext().Request.Cookies["username"];
+            _connectionManager.RemoveUser(username);
 
-            await Clients.Others.SendAsync("UserDisconnected", userName);
+            await Clients.Others.SendAsync("UserDisconnected", username);
 
             await base.OnDisconnectedAsync(exception);
         }

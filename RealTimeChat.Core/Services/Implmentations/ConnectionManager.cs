@@ -11,9 +11,9 @@ namespace RealTimeChat.Core.Services.Implmentations
         {
             return _userNames.TryAdd(username, connectionId); // we can have a list of connections if the user will have more than one connection
         }
-        public bool RemoveUser(string userName)
+        public bool RemoveUser(string username)
         {
-            return _userNames.TryRemove(userName, out string connectionId);
+            return _userNames.TryRemove(username, out string connectionId);
         }
 
         public List<string> GetOnlineUsersNames()

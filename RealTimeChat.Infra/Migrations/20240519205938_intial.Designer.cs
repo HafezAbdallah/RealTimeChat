@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RealTimeChat.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240519170714_intial")]
+    [Migration("20240519205938_intial")]
     partial class intial
     {
         /// <inheritdoc />

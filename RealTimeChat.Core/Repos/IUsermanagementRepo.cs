@@ -10,7 +10,7 @@ namespace RealTimeChat.Core.Repos
         Task<bool> Register(User user);
         Task<List<string>> GetUsersNames();
         Task SaveUserMessage(Message message);
-        Task <User> GetUser (string userName);
+        Task <User> GetUser (string username);
         Task<List<Message>> GetUsersUnRecivedMessages(string username);// this should be in MessagesRepo but it's here for simplicty
     }
 }

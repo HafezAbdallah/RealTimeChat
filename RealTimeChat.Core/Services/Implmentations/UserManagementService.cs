@@ -25,7 +25,7 @@ namespace RealTimeChat.Core.Services.Implmentations
             {
                 userStatus.Add(new UserStatusDto
                 {
-                    UserName = user,
+                    Username = user,
                     Status = string.IsNullOrEmpty(_connectionManager.GetUserConnection(user)) ? UserStatus.Offline : UserStatus.Online
 
                 });
@@ -72,11 +72,11 @@ namespace RealTimeChat.Core.Services.Implmentations
         {
             Dictionary<string, List<ChatMessage>> result = new Dictionary<string, List<ChatMessage>>();
 
-            var allUsers = (await GetUsersStatus()).Where(x => x.UserName != callerUserName).ToList();
+            var allUsers = (await GetUsersStatus()).Where(x => x.Username != callerUserName).ToList();
 
             foreach (var user in allUsers)
             {
-                result.Add(user.UserName, new List<ChatMessage>());
+                result.Add(user.Username, new List<ChatMessage>());
             }
 
             List<Message> unReceivedMessages = await _userManagementRepo.GetUsersUnRecivedMessages(callerUserName);
